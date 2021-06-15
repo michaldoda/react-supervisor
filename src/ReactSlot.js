@@ -1,11 +1,12 @@
 /**
  *
  * @param element
- * @param handler
+ * @param reactComponent
  * @constructor
  */
-function ReactSlot(element, handler) {
+function ReactSlot(element, reactComponent) {
     this.element = element;
+    this.reactComponent = reactComponent;
     this.isRendered = false;
     this.hasFailed = false;
 }

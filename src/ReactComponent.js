@@ -1,12 +1,14 @@
 /**
  *
  * @param selector {string}
- * @param handler
+ * @param component
+ * @param isCustomRender {boolean}
  * @constructor
  */
-function ReactComponent(selector, handler) {
+function ReactComponent(selector, component, isCustomRender = false) {
     this.selector = selector;
-    this.handler = handler;
+    this.component = component;
+    this.isCustomRender = isCustomRender;
 }
 
 export { ReactComponent };

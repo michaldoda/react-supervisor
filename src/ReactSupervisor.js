@@ -29,23 +29,36 @@ function ReactSupervisor() {
             );
             for (let j = 0; j < elements.length; j++) {
                 console.log(components[i]);
-                renderReactSlot(elements[j], components[i].handler);
+                renderReactSlot(elements[j], components[i]);
             }
         }
     };
-    const renderReactSlot = (element, handler) => {
-        let slot = new ReactSlot(element, handler);
+
+    /**
+     * @param element {HTMLElement}
+     */
+    const extractPropsFromDataset = (element) => {
+        return element.dataset;
+    };
+
+    const renderReactSlot = (element, reactComponent) => {
+        let slot = new ReactSlot(element, reactComponent);
         slot.element.classList.add("rendered");
         try {
-            // slot.render();
-            let ComponentToRender = handler;
-            ReactDOM.render(<ComponentToRender {...element.dataset} />, element);
+            let props = extractPropsFromDataset(element);
+            if (slot.reactComponent.isCustomRender) {
+                slot.reactComponent.component(element, props);
+            } else {
+                let ComponentToRender = slot.reactComponent.component;
+                ReactDOM.render(<ComponentToRender {...props} />, element);
+            }
+
             slot.isRendered = true;
             console.info("[ReactSupervisor] ReactSlot has been rendered.");
         } catch (e) {
-            slot.isRendered = false;
+            slot.isRendered = true;
             slot.hasFailed = true;
-            // console.error("[ReactSupervisor] ReactSlot render has failed.",e );
+            console.error("[ReactSupervisor] ReactSlot render has failed.");
         }
         slots.push(slot);
     };
@@ -68,10 +81,10 @@ function ReactSupervisor() {
     /**
      *
      * @param selector
-     * @param renderHandler
+     * @param component
      * @return void
      */
-    this.registerComponent = (selector, renderHandler) => {
+    this.registerComponent = (selector, component) => {
         let isAlreadyRegistered =
             components.filter((item) => {
                 return item.selector === selector;
@@ -84,7 +97,7 @@ function ReactSupervisor() {
             return;
         }
 
-        components.push(new ReactComponent(selector, renderHandler));
+        components.push(new ReactComponent(selector, component));
         console.log("[ReactSupervisor] ReactComponent has been registered.");
     };
 
@@ -101,8 +114,8 @@ function ReactSupervisor() {
             return;
         }
 
-        let element = document.querySelector(selector);
-        customRender(element, element.dataset);
+        components.push(new ReactComponent(selector, customRender, true));
+        console.log("[ReactSupervisor] ReactComponent has been registered.");
     }
 }
 
