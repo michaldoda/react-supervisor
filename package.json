@@ -1,0 +1,40 @@
+{
+  "name": "react-supervisor",
+  "version": "0.2.0",
+  "license": "MIT",
+  "author": {
+    "name": "Michal Doda",
+    "email": "michael.johnny.b@gmail.com",
+    "url": "https://github.com/michaldoda"
+  },
+  "homepage": "https://github.com/michaldoda/react-supervisor#readme",
+  "repository": "github:michaldoda/react-supervisor",
+  "description": "React tool designed to supervise react components. It was created to organise the process of embedding react components into your templates or MVC applications. One library to rule them all.",
+  "keywords": [
+    "react for templates",
+    "react mvc",
+    "react blade",
+    "react laravel",
+    "react django templates",
+    "react symfony encore"
+  ],
+  "files": [
+    "/dist"
+  ],
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "scripts": {
+    "build:prod": "rollup src/index.js -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0"
+  }
+}
