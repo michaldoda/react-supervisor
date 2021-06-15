@@ -64,7 +64,7 @@ ReactSupervisor.registerComponentWithCustomRender(".really-awesome-button", (el,
     ReactDOM.render(<Button {...props} />, el);
 });
 
-const reactSupervisor = ReactSupervisor.initialize();
+ReactSupervisor.initialize();
 ```
 
 ```html
