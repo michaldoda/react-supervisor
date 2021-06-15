@@ -39,57 +39,77 @@ ReactSupervisor.forceRender(); // will force a DOM scan, it's helpful with dynam
 * doesn't share state - it means that all components are independent
 
 ## What I can do with it?
-You can create complex dashboards, modals, or simple form controls (such as async search, drag & drop or date pickers etc). You can still use css frameworks (such as [bootstrap](https://getbootstrap.com/)) mixed with the power of [React](https://reactjs.org/). More examples will appear in the documentation - soon ...
+You can create complex dashboards, modals, or simple form controls (such as async search, drag & drop or date pickers etc). You can still use your favorite CSS frameworks (such as [bootstrap](https://getbootstrap.com/)), React UI frameworks (eg [Fluent UI](https://developer.microsoft.com/en-us/fluentui), [Material-UI](https://material-ui.com/), etc) or any other React standalone components (eg [react-select](https://react-select.com/)). More examples will appear in the documentation soon.
 
-## Example
+## Examples
 
+#### # Register once and use multiple times
 ```javascript
-// some.js
+// ./some/path.js
 import { ReactSupervisor } from "react-supervisor";
-import ReactDOM from "react-dom";
 import Button from '@material-ui/core/Button';
-import {
-    CallMeModal,
-    AdminDashboard,
-    ChatBot
-} from "./some-react-components"
 
+ReactSupervisor.registerComponent(".material-ui-button", Button);
+ReactSupervisor.initialize();
+``` 
 
-ReactSupervisor.registerComponent(".admin-dashboard", AdminDashboard);
-ReactSupervisor.registerComponent(".chat-bot", ChatBot);
-ReactSupervisor.registerComponent(".call-me-modal", CallMeModal);
-ReactSupervisor.registerComponent(".awesome-button", Button);
-ReactSupervisor.registerComponentWithCustomRender(".really-awesome-button", (el, props) => {
+```html
+<!-- ./some/page.html -->
+<div class="material-ui-button" data-children="Click me!" data-color="primary"></div>
+<div class="material-ui-button" data-children="And me!" data-color="secondary"></div>
+```
+
+#### # If you need to render a more complicated component you can use custom render
+```javascript
+// ./path.js
+import { ReactSupervisor } from "react-supervisor";
+import Button from '@material-ui/core/Button';
+
+ReactSupervisor.registerComponentWithCustomRender(".awesome-button", (el, props) => {
     // do whatever you want with props or any other logic
     ReactDOM.render(<Button {...props} />, el);
 });
-
-ReactSupervisor.initialize();
-```
+``` 
 
 ```html
-<!-- some.html -->
-<html lang="en">
-    <body>
-        <div class="admin-dashboard"></div>
-        <div class="chat-bot"></div>
-        <div class="call-me-modal"></div>
-        
-        <div
-            class="awesome-button"
-            data-children="Awesome button"
-            data-color="secondary"
-        ></div>
-        
-        <div
-            class="really-awesome-button"
-            data-children="Really awesome button"
-            data-color="primary"
-        ></div>
-        
-        <script src="index.js"></script>
-    </body>
-</html>
+<!-- ./some/page.html -->
+<div class="awesome-button" data-children="Awesome click!" data-color="primary"></div>
+```
+
+#### # You can register component directly within file
+```javascript
+// ./some/path.js
+import { ReactSupervisor } from "react-supervisor";
+import React, { useState } from "react";
+
+const CallMeModalComponent = () => {
+    const [state, setState] = useState(0);
+    return (<>Call me</>);
+};
+
+ReactSupervisor.registerComponentWithCustomRender(".my-component", CallMeModalComponent);
+// no export needed, but you have to import that file in your entrypoint
+``` 
+
+```html
+<!-- ./page.html -->
+<div class="my-component"></div>
+```
+
+
+#### # Pass props via data attributes
+```javascript
+// ./path.js
+import { ReactSupervisor } from "react-supervisor";
+import React, { useState } from "react";
+import { TextField } from '@fluentui/react/lib/TextField';
+
+ReactSupervisor.registerComponentWithCustomRender(".fluent-ui-textarea", TextField);
+``` 
+
+```html
+<!-- ./page.html -->
+<div class="fluent-ui-textarea" data-label="Description" data-name="description"></div>
 ```
 
 ## Contributing
