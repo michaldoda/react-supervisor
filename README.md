@@ -87,13 +87,13 @@ const CallMeModalComponent = () => {
     return (<>Call me</>);
 };
 
-ReactSupervisor.registerComponentWithCustomRender(".my-component", CallMeModalComponent);
+ReactSupervisor.registerComponentWithCustomRender(".call-me-modal", CallMeModalComponent);
 // no export needed, but you have to import that file in your entrypoint
 ``` 
 
 ```html
 <!-- ./page.html -->
-<div class="my-component"></div>
+<div class="call-me-modal"></div>
 ```
 
 
@@ -109,7 +109,7 @@ ReactSupervisor.registerComponentWithCustomRender(".fluent-ui-textarea", TextFie
 
 ```html
 <!-- ./page.html -->
-<div class="fluent-ui-textarea" data-label="Description" data-name="description"></div>
+<div class="fluent-ui-textarea" data-label="Description" data-name="description" data-rows="3"></div>
 ```
 
 ## Contributing
