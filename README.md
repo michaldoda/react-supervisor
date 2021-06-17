@@ -1,10 +1,9 @@
 # react-supervisor
 
-<p>
-    <a href="https://www.npmjs.com/package/react-supervisor"><img src="https://flat.badgen.net/npm/dt/react-supervisor" alt="react-supervisor total downloads" /></a>
-    <a href="https://www.npmjs.com/package/react-supervisor"><img src="https://flat.badgen.net/npm/v/react-supervisor" alt="react-supervisor version" /></a>
-    <a href="https://www.npmjs.com/package/react-supervisor"><img src="https://flat.badgen.net/npm/license/react-supervisor" alt="react-supervisor license" /></a>
-</p>
+![release workflow result](https://github.com/michaldoda/react-supervisor/actions/workflows/release.yml/badge.svg)
+![total downloads](https://flat.badgen.net/npm/dt/react-supervisor)
+![latest version](https://flat.badgen.net/npm/v/react-supervisor)
+![licence](https://flat.badgen.net/npm/license/react-supervisor)
 
 **react-supervisor** is a very simple npm library (<= **4kb**) for dealing with react components in templates (standard MVC way). If you ever worked with mid/big enterprise software with multiple technologies you probably know how difficult it is to maintain various technologies in one or multiple projects. You will find it very useful to create new components with React and append them in your website in organised way. Hope it will help you!  
 
