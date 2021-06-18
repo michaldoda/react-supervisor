@@ -119,4 +119,4 @@ function ReactSupervisor() {
     }
 }
 
-export default new ReactSupervisor();
+export default ReactSupervisor;
