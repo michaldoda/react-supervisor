@@ -5,23 +5,29 @@ import * as ReactDOM from "react-dom";
 
 function ReactSupervisor() {
     /**
-     *
+     * @type {boolean}
+     */
+    let isInitialized = false;
+
+    /**
      * @type {ReactSlot[]}
      */
     let slots = [];
+
     /**
-     *
      * @type {ReactComponent[]}
      */
     let components = [];
+
     /**
-     *
      * @type {*}
      */
-    let watchInterval;
+
     /**
-     * @return void
-     */
+    * @type {null|number}
+    */
+    let watchInterval = null;
+
     const watch = () => {
         for (let i = 0; i < components.length; i++) {
             let elements = document.querySelectorAll(
@@ -64,13 +70,20 @@ function ReactSupervisor() {
     };
 
     this.initialize = () => {
-        this.forceRender();
-        watchInterval = setInterval(watch, 5000);
-        console.info("[ReactSupervisor] ReactSupervisor has been initialized.");
+        if (isInitialized) {
+            console.warn("[ReactSupervisor] ReactSupervisor is already initialized.");
+        } else {
+            isInitialized = true;
+            this.forceRender();
+            watchInterval = setInterval(watch, 5000);
+            console.info("[ReactSupervisor] ReactSupervisor has been initialized.");
+        }
     };
+
     this.forceRender = () => {
         watch();
     };
+
     this.info = () => {
         console.table(slots);
         console.table(components);
@@ -116,7 +129,35 @@ function ReactSupervisor() {
 
         components.push(new ReactComponent(selector, customRender, true));
         console.log("[ReactSupervisor] ReactComponent has been registered.");
-    }
+    };
+
+    /**
+     * @return {boolean}
+     */
+    this.getIsInitialized = () => {
+        return isInitialized;
+    };
+
+    /**
+     * @return {ReactSlot[]}
+     */
+    this.getSlots = () => {
+        return slots;
+    };
+
+    /**
+     * @return {ReactComponent[]}
+     */
+    this.getComponents = () => {
+        return components;
+    };
+
+    /**
+     * @return {null|number}
+     */
+    this.getWatchInterval = () => {
+        return watchInterval;
+    };
 }
 
-export default new ReactSupervisor();
+export default ReactSupervisor;
