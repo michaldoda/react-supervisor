@@ -23,10 +23,11 @@ function ReactSupervisor() {
      * @type {*}
      */
 
-    let watchInterval;
     /**
-     * @return void
-     */
+    * @type {null|number}
+    */
+    let watchInterval = null;
+
     const watch = () => {
         for (let i = 0; i < components.length; i++) {
             let elements = document.querySelectorAll(
@@ -135,6 +136,27 @@ function ReactSupervisor() {
      */
     this.getIsInitialized = () => {
         return isInitialized;
+    };
+
+    /**
+     * @return {ReactSlot[]}
+     */
+    this.getSlots = () => {
+        return slots;
+    };
+
+    /**
+     * @return {ReactComponent[]}
+     */
+    this.getComponents = () => {
+        return components;
+    };
+
+    /**
+     * @return {null|number}
+     */
+    this.getWatchInterval = () => {
+        return watchInterval;
     };
 }
 
