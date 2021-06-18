@@ -5,19 +5,24 @@ import * as ReactDOM from "react-dom";
 
 function ReactSupervisor() {
     /**
-     *
+     * @type {boolean}
+     */
+    let isInitialized = false;
+
+    /**
      * @type {ReactSlot[]}
      */
     let slots = [];
+
     /**
-     *
      * @type {ReactComponent[]}
      */
     let components = [];
+
     /**
-     *
      * @type {*}
      */
+
     let watchInterval;
     /**
      * @return void
@@ -64,13 +69,20 @@ function ReactSupervisor() {
     };
 
     this.initialize = () => {
-        this.forceRender();
-        watchInterval = setInterval(watch, 5000);
-        console.info("[ReactSupervisor] ReactSupervisor has been initialized.");
+        if (isInitialized) {
+            console.warn("[ReactSupervisor] ReactSupervisor is already initialized.");
+        } else {
+            isInitialized = true;
+            this.forceRender();
+            watchInterval = setInterval(watch, 5000);
+            console.info("[ReactSupervisor] ReactSupervisor has been initialized.");
+        }
     };
+
     this.forceRender = () => {
         watch();
     };
+
     this.info = () => {
         console.table(slots);
         console.table(components);
@@ -116,7 +128,14 @@ function ReactSupervisor() {
 
         components.push(new ReactComponent(selector, customRender, true));
         console.log("[ReactSupervisor] ReactComponent has been registered.");
-    }
+    };
+
+    /**
+     * @return {boolean}
+     */
+    this.getIsInitialized = () => {
+        return isInitialized;
+    };
 }
 
 export default ReactSupervisor;
