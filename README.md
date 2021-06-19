@@ -15,7 +15,7 @@
 ## Installation
 
 ```bash
-npm install react-supervisor
+npm i react-supervisor
 # or 
 yarn add react-supervisor
 ```
@@ -37,9 +37,17 @@ ReactSupervisor.forceRender(); // will force a DOM scan, it's helpful with dynam
 
 ## What it does?
 * scans the DOM and renders registered components
-* takes all **data** attributes from container and passes them as props to component
+* takes all **data-** attributes from container and passes them as props to component
 * watches for changes to the DOM and renders new components into selectors that match
 * the parent of a correctly rendered component will be marked with the **rendered** class
+* convert, parse all castable **data-** attributes with specified type.
+* supported types for castable attributes (*string* as a default):
+    * **number** - `data-cast-number-field-name="123"`
+    * **float** - `data-cast-float-field-name="3.14"`
+    * **json** - `data-cast-number-field-name='{ "first_name": "Joe", "last_name": "Doe" }'`
+    * **boolean** - `data-cast-float-field-name="true"`
+    * **string** - `data-cast-float-field-name="3.14"`
+    
 
 ## What it doesn't do?
 * doesn't affect your css styles
@@ -47,6 +55,19 @@ ReactSupervisor.forceRender(); // will force a DOM scan, it's helpful with dynam
 
 ## What I can do with it?
 You can create complex dashboards, modals, or simple form controls (such as async search, drag & drop or date pickers etc). You can still use your favorite CSS frameworks (such as [bootstrap](https://getbootstrap.com/)), React UI frameworks (eg [Fluent UI](https://developer.microsoft.com/en-us/fluentui), [Material-UI](https://material-ui.com/), etc) or any other React standalone components (eg [react-select](https://react-select.com/)). More examples will appear in the documentation soon.
+
+## Castable data attributes table
+
+| attribute | key in props | value |
+| :---                                      |     :---  |          ---:       |
+| `data-cast-number-age="3.14"`             | `age`     | `3`                 |
+| `data-cast-float-pi-value="3.14"`         | `piValue` | `3.14`              |
+| `data-cast-json-data='{"piValue": 3.14}'` | `data`    | `{ piValue: 3.14 }` |
+| `data-cast-boolean-is-active="true"`      | `isActive`| `true`              |
+| `data-cast-boolean-is-active="0"`         | `isActive`| `false`             |
+| `data-cast-string-index="0001"`           | `index`   |  `"0001"`           |
+
+*In js/html logic the default type is **string**, if that works for you then there is no need to use `data-cast-type` convention, but its really helpful if you have to pass json objects into components* 
 
 ## Examples
 
@@ -118,6 +139,19 @@ ReactSupervisor.registerComponent(".fluent-ui-textarea", TextField);
 <!-- ./page.html -->
 <div class="fluent-ui-textarea" data-label="Description" data-name="description" data-rows="3"></div>
 ```
+
+#### # Use castable data attributes to pass any data type you want, e.g. json object
+
+```html
+<div class="user-details" data-cast-json-user-details='{ "first_name": "Joe", "age": 256 }'></div>
+```
+This syntax will inject a `userDetails` object in component's `props`. 
+```javascript
+const UserDetailsComponent = (props) => {
+    return (<>${props.userDetails?.first_name}</>); // Joe
+}
+```
+
 
 ## Contributing
 Any help would be much appreciated. For major changes, please open an issue first to discuss what you would like to change.
