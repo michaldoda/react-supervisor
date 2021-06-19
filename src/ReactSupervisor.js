@@ -2,6 +2,7 @@ import { ReactSlot } from "./ReactSlot";
 import { ReactComponent } from "./ReactComponent";
 import React from "react";
 import * as ReactDOM from "react-dom";
+import {extractProps} from "./extractProps";
 
 function ReactSupervisor() {
     /**
@@ -40,18 +41,11 @@ function ReactSupervisor() {
         }
     };
 
-    /**
-     * @param element {HTMLElement}
-     */
-    const extractPropsFromDataset = (element) => {
-        return element.dataset;
-    };
-
     const renderReactSlot = (element, reactComponent) => {
         let slot = new ReactSlot(element, reactComponent);
         slot.element.classList.add("rendered");
         try {
-            let props = extractPropsFromDataset(element);
+            let props = extractProps(element);
             if (slot.reactComponent.isCustomRender) {
                 slot.reactComponent.component(element, props);
             } else {
