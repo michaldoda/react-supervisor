@@ -35,6 +35,14 @@ ReactSupervisor.forceRender(); // will force a DOM scan, it's helpful with dynam
 
 ````
 
+## Different React versions
+
+| react   | react-supervisor | 
+|:--------|:-----------------|
+| `^18.0.0` | `^4.0.1`         |
+| `^17.0.0` | `^3.0.0`         |
+| `^16.0.0` | `^2.0.0`         |
+
 ## What it does?
 * scans the DOM and renders registered components
 * takes all **data-** attributes from container and passes them as props to component
