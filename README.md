@@ -35,7 +35,7 @@ ReactSupervisor.forceRender(); // will force a DOM scan, it's helpful with dynam
 
 ````
 
-## Different React versions
+## Versions
 
 | react   | react-supervisor | 
 |:--------|:-----------------|
