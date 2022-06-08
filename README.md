@@ -1,4 +1,11 @@
-# react-supervisor
+<h1 align="center">
+react-supervisor
+</h1>
+
+<p align="center">
+ <img width="" src="https://github.com/michaldoda/react-supervisor/blob/main/docs/image.png?raw=true" alt="react-supervisor example">
+</p>
+
 
 <p>
     <a target="_blank" rel="noopener noreferrer" href="https://github.com/michaldoda/react-supervisor/actions/workflows/release.yml/badge.svg"><img src="https://github.com/michaldoda/react-supervisor/actions/workflows/release.yml/badge.svg" alt="release workflow result" style="max-width:100%;"></a>
