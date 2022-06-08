@@ -1,6 +1,6 @@
 {
   "name": "react-supervisor",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "license": "MIT",
   "author": {
     "name": "Michal Doda",
@@ -29,8 +29,8 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.5",
