@@ -1,7 +1,7 @@
 import { ReactSlot } from "./ReactSlot";
 import { ReactComponent } from "./ReactComponent";
 import React from "react";
-import * as ReactDOM from "react-dom";
+import ReactDOM from 'react-dom/client';
 import {extractProps} from "./extractProps";
 
 function ReactSupervisor() {
@@ -50,7 +50,8 @@ function ReactSupervisor() {
                 slot.reactComponent.component(element, props);
             } else {
                 let ComponentToRender = slot.reactComponent.component;
-                ReactDOM.render(<ComponentToRender {...props} />, element);
+                let root = ReactDOM.createRoot(element);
+                root.render(<ComponentToRender {...props} />)
             }
 
             slot.isRendered = true;
