@@ -3,7 +3,7 @@ react-supervisor
 </h1>
 
 <p align="center">
- <img width="" src="https://github.com/michaldoda/react-supervisor/blob/main/docs/image.png?raw=true" alt="react-supervisor example">
+ <img width="" src="https://github.com/michaldoda/react-supervisor/blob/main/docs/image2.png?raw=true" alt="react-supervisor example">
 </p>
 
 
